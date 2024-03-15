@@ -1,10 +1,13 @@
 import csv
 
-with open("My Spotify Library.csv", "r") as songs_library:
-    csv_reader = csv.reader(songs_library)
+with open("tracks.csv", "r") as tracks:
+    reader = csv.reader(tracks)
 
-    with open("tracks.csv", "w") as tracks:
-        csv_writer = csv.writer(tracks)
+    with open("songs_list.csv", "w") as songs:
+        writer = csv.writer(songs, delimiter=",")
 
-        for line in csv_reader:
-            csv_writer.writerow(line)
+        for line in reader:
+            try:
+                writer.writerow((line[0], line[1], line[2], line[5]))
+            except IndexError:
+                continue
